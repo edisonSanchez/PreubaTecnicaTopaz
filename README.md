@@ -3,9 +3,13 @@ Aplicación Android desarrollada con Kotlin, Jetpack Compose, siguiendo principi
 Principios aplicados:
 
 -Separación de responsabilidades
+
 -Inversión de dependencias
+
 -Estado reactivo con ViewModel
+
 -UI declarativa con Compose
+
 -Manejo de estado con StateFlow / Flow
 
 Requisitos
