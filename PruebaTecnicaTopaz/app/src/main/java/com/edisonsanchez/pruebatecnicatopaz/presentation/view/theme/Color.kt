@@ -1,4 +1,4 @@
-package com.edisonsanchez.pruebatecnicatopaz.ui.theme
+package com.edisonsanchez.pruebatecnicatopaz.presentation.view.theme
 
 import androidx.compose.ui.graphics.Color
 

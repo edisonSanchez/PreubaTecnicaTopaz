@@ -1,4 +1,4 @@
-package com.edisonsanchez.pruebatecnicatopaz.ui.theme
+package com.edisonsanchez.pruebatecnicatopaz.presentation.view.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

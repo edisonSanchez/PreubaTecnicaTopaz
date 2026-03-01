@@ -1,6 +1,5 @@
-package com.edisonsanchez.pruebatecnicatopaz.ui.theme
+package com.edisonsanchez.pruebatecnicatopaz.presentation.view.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
