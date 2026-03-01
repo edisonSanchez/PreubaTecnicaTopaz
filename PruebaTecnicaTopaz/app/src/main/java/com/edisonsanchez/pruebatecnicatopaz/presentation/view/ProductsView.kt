@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -26,6 +27,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.edisonsanchez.pruebatecnicatopaz.R
 import com.edisonsanchez.pruebatecnicatopaz.data.Product
 import com.edisonsanchez.pruebatecnicatopaz.presentation.view.theme.PruebaTecnicaTopazTheme
 import com.edisonsanchez.pruebatecnicatopaz.presentation.viewModel.ProductsViewModel
@@ -42,7 +44,7 @@ fun ProductsView(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
-                Text("No se encontraron productos")
+                Text(stringResource(R.string.message_not_found_products))
             }
         } else {
             LazyColumn {
@@ -69,7 +71,8 @@ fun ProductItem(product: Product, onClick: (Int) -> Unit) {
         onClick = { onClick(product.id) }
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {

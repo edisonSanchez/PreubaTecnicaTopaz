@@ -19,12 +19,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import coil.compose.AsyncImage
+import com.edisonsanchez.pruebatecnicatopaz.R
 import com.edisonsanchez.pruebatecnicatopaz.presentation.viewModel.DetailsProductViewModel
 
 @Composable
@@ -34,8 +36,10 @@ fun DetailsProductView(
 ) {
     val detailsProduct by viewModel.detailsProduct.collectAsState()
     val resultAddFavoriteProduct by viewModel.resultAddFavoriteProduct.collectAsState()
+    val resultRemoveFavoriteProduct by viewModel.resultRemoveFavoriteProduct.collectAsState()
+    val resultCheckIsFavoriteProduct by viewModel.resultCheckIsFavoriteProduct.collectAsState()
     viewModel.getDetailsProduct(productId)
-
+    viewModel.checkIsFavoriteProduct(productId)
     Column(
         modifier = Modifier
             .padding(32.dp)
@@ -66,13 +70,13 @@ fun DetailsProductView(
             Text(
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp,
-                text = "Precio: ${detailsProduct.price}$",
+                text = stringResource(R.string.text_price, detailsProduct.price),
                 modifier = Modifier.padding(bottom = 8.dp)
             )
             Text(
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp,
-                text = "Rating: ${detailsProduct.rating}"
+                text = stringResource(R.string.text_rating, detailsProduct.rating)
             )
             Button(
                 modifier = Modifier
@@ -81,9 +85,20 @@ fun DetailsProductView(
                 onClick = {
                     viewModel.addFavoriteProduct(detailsProduct)
                 },
-                enabled = resultAddFavoriteProduct <= 0
+                enabled = resultCheckIsFavoriteProduct.not()
             ) {
-                Text(text = "Agregar a favoritos")
+                Text(text = stringResource(R.string.text_button_add))
+            }
+            Button(
+                modifier = Modifier
+                    .padding(top = 16.dp)
+                    .fillMaxWidth(),
+                onClick = {
+                    viewModel.removeFavoriteProduct(detailsProduct.id)
+                },
+                enabled = resultCheckIsFavoriteProduct
+            ) {
+                Text(text = stringResource(R.string.text_button_delete))
             }
         } ?: run {
             Box(
@@ -94,11 +109,21 @@ fun DetailsProductView(
             }
         }
         if (resultAddFavoriteProduct > 0){
-            Toast.makeText(LocalContext.current, "Producto agregado a favoritos",
+            Toast.makeText(LocalContext.current,
+                stringResource(R.string.message_add_product),
                 Toast.LENGTH_SHORT).show()
         } else if (resultAddFavoriteProduct < 0) {
-            Toast.makeText(LocalContext.current, "Ocurrio un error al agregar el" +
-                    " producto a favoritos, intentalo mas tarde",
+            Toast.makeText(LocalContext.current,
+                stringResource(R.string.message_error_add_product),
+                Toast.LENGTH_SHORT).show()
+        }
+        if (resultRemoveFavoriteProduct > 0){
+            Toast.makeText(LocalContext.current,
+                stringResource(R.string.message_remove_product),
+                Toast.LENGTH_SHORT).show()
+        } else if (resultRemoveFavoriteProduct == 0) {
+            Toast.makeText(LocalContext.current,
+                stringResource(R.string.message_error_remove_product),
                 Toast.LENGTH_SHORT).show()
         }
     }

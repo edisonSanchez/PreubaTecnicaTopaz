@@ -21,6 +21,8 @@ class DataRepository @Inject constructor(
     val detailsProduct: MutableStateFlow<Product?> = MutableStateFlow(null)
     val favoriteProducts: MutableStateFlow<List<FavoriteProduct>?> = MutableStateFlow(null)
     val resultAddFavoriteProduct: MutableStateFlow<Long> = MutableStateFlow(0)
+    val resultRemoveFavoriteProduct: MutableStateFlow<Int> = MutableStateFlow(-1)
+    val resultCheckIsFavoriteProduct: MutableStateFlow<Boolean> = MutableStateFlow(false)
 
     fun getProducts() {
         endPointsApi.getProducts().enqueue(object : Callback<ProductsResponse> {
@@ -84,6 +86,30 @@ class DataRepository @Inject constructor(
             val id = favoriteProductsDao.insertFavoriteProduct(favoriteProduct)
             withContext(Dispatchers.Main) {
                 resultAddFavoriteProduct.value = id
+            }
+        }
+    }
+
+    @OptIn(DelicateCoroutinesApi::class)
+    fun removeFavoriteProduct(idProduct: Int) {
+        GlobalScope.launch(Dispatchers.IO) {
+            val rows = favoriteProductsDao.deleteById(idProduct)
+            withContext(Dispatchers.Main) {
+                resultRemoveFavoriteProduct.value = rows
+            }
+        }
+    }
+
+    @OptIn(DelicateCoroutinesApi::class)
+    fun checkIsFavoriteProduct(idProduct: Int) {
+        GlobalScope.launch(Dispatchers.IO) {
+            val product = favoriteProductsDao.getById(idProduct)
+            withContext(Dispatchers.Main) {
+                product?.let {
+                    resultCheckIsFavoriteProduct.value = true
+                } ?: run {
+                    resultCheckIsFavoriteProduct.value = false
+                }
             }
         }
     }

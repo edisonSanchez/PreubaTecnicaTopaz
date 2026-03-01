@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">PruebaTecnicaTopaz</string>
+    <string name="text_button_delete">Eliminar de favoritos</string>
+    <string name="message_add_product">Producto agregado a favoritos</string>
+    <string name="text_button_add">Agregar a favoritos</string>
+    <string name="message_not_found_favorite_products">No se encontraron productos favoritos</string>
+    <string name="message_not_found_products">No se encontraron productos</string>
+    <string name="message_remove_product">Producto eliminado de favoritos</string>
+    <string name="message_error_add_product">Ocurrio un error al agregar el producto a favoritos, intentalo mas tarde</string>
+    <string name="text_rating">Rating: %1$s</string>
+    <string name="message_error_remove_product">Ocurrio un error al eliminar el producto de favoritos, intentalo mas tarde</string>
+    <string name="text_price">Price: %1$s$</string>
 </resources>

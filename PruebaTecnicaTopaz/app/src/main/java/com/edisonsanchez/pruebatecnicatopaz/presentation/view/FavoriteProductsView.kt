@@ -11,8 +11,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.edisonsanchez.pruebatecnicatopaz.R
 import com.edisonsanchez.pruebatecnicatopaz.data.Product
 import com.edisonsanchez.pruebatecnicatopaz.presentation.viewModel.FavoriteProductsViewModel
 
@@ -29,7 +31,7 @@ fun FavoriteProductsView(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
-                Text("No se encontraron productos favoritos")
+                Text(stringResource(R.string.message_not_found_favorite_products))
             }
         } else {
             LazyColumn {

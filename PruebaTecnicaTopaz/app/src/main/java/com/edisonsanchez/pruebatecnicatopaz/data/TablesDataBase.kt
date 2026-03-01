@@ -27,7 +27,7 @@ interface FavoriteProductsDao {
     fun getById(id: Int): FavoriteProduct?
 
     @Query("DELETE FROM FavoriteProducts WHERE id = :id")
-    fun deleteById(id: Int)
+    fun deleteById(id: Int) : Int
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertFavoriteProduct(favoriteProduct: FavoriteProduct) : Long
